@@ -522,8 +522,16 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.flex {
+  display: flex;
+}
+
 .grid {
   display: grid;
+}
+
+.hidden {
+  display: none;
 }
 
 .h-32 {
@@ -534,15 +542,42 @@ video {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.gap-4 {
-  gap: 1rem;
+.justify-center {
+  justify-content: center;
 }
 
 .gap-2 {
   gap: 0.5rem;
 }
 
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.bg-blue-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(29 78 216 / var(--tw-bg-opacity));
+}
+
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.text-4xl {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.font-bold {
+  font-weight: 700;
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
