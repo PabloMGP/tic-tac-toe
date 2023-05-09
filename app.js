@@ -104,7 +104,7 @@ const gameboard = (function () {
       const { choice } = player;
       const icon = createIcon(choice);
 
-      // Data Biding to avoid repeated choices at same array
+      // Data Binding to avoid repeated choices at same array
       if (gameboard.board[index] !== 'null') {
         return;
       }
