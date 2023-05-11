@@ -11,34 +11,45 @@
 
 <body>
 
-    <h1 class='font-bold text-4xl'>Tic-Tac-Toe</h1>
+    <div class="container flex flex-col justify-center align-center">
 
-    <button class='human rounded-full bg-blue-700 p-3 text-white'>Play vs human</button>
-    <button class='ai rounded-full bg-blue-700 p-3 text-white'>Play vs AI</button>
-  
+        <h1 class='font-bold text-4xl text-primaryColor m-6'>Tic-Tac-Toe</h1>
 
+        <div class="selectMode flex flex-col rounded-lg bg-backgroundLight p-12 justify-center mx-auto m-6 gap-5">
+            <h2 class='p-3 text-3xl text-white font-bold max-w-sm'>Select a Game Mode</h2>
+            <button
+                class='human rounded-full bg-fillColor p-3 text-white font-bold max-w-sm border-4 border-transparent hover:invert hover:border-4 hover:border-lime-500'>Human
+                vs Human</button>
+            <button
+                class='ai rounded-full bg-blue-700 p-3 text-white font-bold max-w-sm border-4 border-transparent hover:invert hover:border-4 hover:border-lime-500'>Human
+                vs AI</button>
+        </div>
 
-    <div class='gameboard grid grid-cols-3 gap-2'>
-        <div class='flex justify-center align-center bg-gray-200 h-32' data-index='0'></div>
-        <div class='flex justify-center align-center bg-gray-200 h-32' data-index='1'></div>
-        <div class='flex justify-center align-center bg-gray-200 h-32' data-index='2'></div>
-        <div class='flex justify-center align-center bg-gray-200 h-32' data-index='3'></div>
-        <div class='flex justify-center align-center bg-gray-200 h-32' data-index='4'></div>
-        <div class='flex justify-center align-center bg-gray-200 h-32' data-index='5'></div>
-        <div class='flex justify-center align-center bg-gray-200 h-32' data-index='6'></div>
-        <div class='flex justify-center align-center bg-gray-200 h-32' data-index='7'></div>
-        <div class='flex justify-center align-center bg-gray-200 h-32' data-index='8'></div>
+        <div
+            class='hidden playerOneForm flex flex-col rounded-lg bg-backgroundLight p-8 justify-center mx-auto m-6 gap-5 max-w-sm transition duration-400 ease-in hover:bg-backgroundMedium'>
+            <h2 class="text-white text-4xl text-center">Select your choice</h2>
+            <p class="text-primaryColor text-xl text-center">First to choose goes first</p>
+            <div class="flex flex-row justify-center align-center gap-6">
+                <img src="./images/crossWhite.png" alt=""
+                    class='choice cross bg-fillColor rounded-lg w-20 hover:invert hover:border-4 hover:border-lime-500'>
+                <img src="./images/circleWhite.png" alt=""
+                    class='choice circle bg-fillColor rounded-lg w-20 hover:invert hover:border-4 hover:border-lime-500'>
+            </div>
+        </div>
+
+        <div class='gameboard mx-auto'>
+            <div class='flex justify-center align-center bg-gray-200' data-index='0'></div>
+            <div class='flex justify-center align-center bg-gray-200' data-index='1'></div>
+            <div class='flex justify-center align-center bg-gray-200' data-index='2'></div>
+            <div class='flex justify-center align-center bg-gray-200' data-index='3'></div>
+            <div class='flex justify-center align-center bg-gray-200' data-index='4'></div>
+            <div class='flex justify-center align-center bg-gray-200' data-index='5'></div>
+            <div class='flex justify-center align-center bg-gray-200' data-index='6'></div>
+            <div class='flex justify-center align-center bg-gray-200' data-index='7'></div>
+            <div class='flex justify-center align-center bg-gray-200' data-index='8'></div>
+        </div>
+
     </div>
-
-<form action='' class='hidden playerOneForm'>
-    <label for='choice'>Make your choice P1</label>
-    <select name='choice' id='choice'>
-        <option value='none' selected>None</option>
-        <option value='cross'>cross</option>
-        <option value='circle'>circle</option>
-    </select>
-</form>
-
     <script src='app.js'></script>
 </body>
 

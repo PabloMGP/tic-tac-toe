@@ -22,10 +22,12 @@ function players(player1, player2, ai) {
   };
 }
 
-// *Temporary* Players Creation and Game Mode Buttons Variables
+// Players Creation, Game Mode Buttons Variables, and Gameboard Grid
 const { player1, player2, ai } = players('Player One', 'Player Two', 'ai');
 const human = document.querySelector('.human');
 const computer = document.querySelector('.ai');
+const gameboardGrid = document.querySelector('.gameboard');
+const selectMode = document.querySelector('.selectMode');
 
 // Gameboard Module
 const gameboard = (function () {
@@ -87,6 +89,7 @@ const gameboard = (function () {
       reset();
       human.classList.toggle('hidden');
       computer.classList.toggle('hidden');
+      selectMode.classList.toggle('hidden');
     }
   }
 
@@ -128,6 +131,8 @@ const gameboard = (function () {
         return move.aiMove();
       }
       randomDiv.appendChild(icon);
+      randomDiv.classList.add('selected');
+
       gameboard.board[randomIndex] = choice;
       gameboard.gameState.state = 1;
 
@@ -136,6 +141,7 @@ const gameboard = (function () {
         alert(`${player.name} Wins the Game xxx!`);
         human.classList.remove('hidden');
         computer.classList.remove('hidden');
+        selectMode.classList.remove('hidden');
         reset();
       }
     };
@@ -154,6 +160,10 @@ const gameboard = (function () {
       }
 
       gameboardElement.appendChild(icon);
+      icon.classList.add('selected', 'animate');
+      setTimeout(() => {
+        icon.classList.remove('selected', 'animate');
+      }, 500);
       gameboard.board[index] = choice;
 
       if (gameboard.gameState.state === 2 && ai.choice !== '' && gameboard.gameState.rounds <= 4) {
@@ -165,6 +175,7 @@ const gameboard = (function () {
         alert(`${player.name} Wins the Game yyy!`);
         human.classList.remove('hidden');
         computer.classList.remove('hidden');
+        selectMode.classList.remove('hidden');
         reset();
       }
     }
@@ -182,43 +193,49 @@ const gameMode = (function () {
   function initHumanVsHuman() {
     const playerOneForm = document.querySelector('.playerOneForm');
     playerOneForm.classList.toggle('hidden');
-
-    const playerOneChoice = document.querySelector('select[name="choice"]');
-    playerOneChoice.value = playerOneChoice.options[0].value;
-    playerOneChoice.addEventListener('change', (event) => {
-      event.preventDefault();
-      const selectedChoice = playerOneChoice.value;
-      if (selectedChoice === 'cross') {
-        player1.choice = 'cross';
-        player2.choice = 'circle';
-        return playerOneForm.classList.add('hidden');
-      } if (selectedChoice === 'circle') {
-        player1.choice = 'circle';
-        player2.choice = 'cross';
-        return playerOneForm.classList.add('hidden');
-      }
-      throw new Error('Error at Game Modes Module');
+    const playerOneChoice = document.querySelectorAll('.cross, .circle');
+    playerOneChoice.forEach((choice) => {
+      choice.addEventListener('click', (event) => {
+        const selectedChoice = event.target;
+        if (selectedChoice.classList.contains('cross')) {
+          player1.choice = 'cross';
+          player2.choice = 'circle';
+          ai.choice = ''; // Reset AI player's choice
+          gameboardGrid.classList.toggle('hidden');
+          return playerOneForm.classList.add('hidden');
+        } if (selectedChoice.classList.contains('circle')) {
+          player1.choice = 'circle';
+          player2.choice = 'cross';
+          ai.choice = ''; // Reset AI player's choice
+          gameboardGrid.classList.toggle('hidden');
+          return playerOneForm.classList.add('hidden');
+        }
+        throw new Error('Error at Game Modes Module');
+      });
     });
   }
   function initHumanVsAi() {
     const playerOneForm = document.querySelector('.playerOneForm');
     playerOneForm.classList.toggle('hidden');
 
-    const playerOneChoice = document.querySelector('select[name="choice"]');
-    playerOneChoice.value = playerOneChoice.options[0].value;
-    playerOneChoice.addEventListener('change', (event) => {
-      event.preventDefault();
-      const selectedChoice = playerOneChoice.value;
-      if (selectedChoice === 'cross') {
-        player1.choice = 'cross';
-        ai.choice = 'circle';
-        return playerOneForm.classList.add('hidden');
-      } if (selectedChoice === 'circle') {
-        player1.choice = 'circle';
-        ai.choice = 'cross';
-        return playerOneForm.classList.add('hidden');
-      }
-      throw new Error('Error at Game Modes Module');
+    const playerOneChoice = document.querySelectorAll('.cross, .circle');
+
+    playerOneChoice.forEach((choice) => {
+      choice.addEventListener('click', (event) => {
+        const selectedChoice = event.target;
+        if (selectedChoice.classList.contains('cross')) {
+          player1.choice = 'cross';
+          ai.choice = 'circle';
+          gameboardGrid.classList.toggle('hidden');
+          return playerOneForm.classList.add('hidden');
+        } if (selectedChoice.classList.contains('circle')) {
+          player1.choice = 'circle';
+          ai.choice = 'cross';
+          gameboardGrid.classList.toggle('hidden');
+          return playerOneForm.classList.add('hidden');
+        }
+        throw new Error('Error at Game Modes Module');
+      });
     });
   } return {
     initHumanVsHuman,
@@ -231,10 +248,14 @@ human.addEventListener('click', () => {
   gameMode.initHumanVsHuman();
   human.classList.toggle('hidden');
   computer.classList.toggle('hidden');
+  gameboardGrid.classList.toggle('hidden');
+  selectMode.classList.toggle('hidden');
 });
 
 computer.addEventListener('click', () => {
   gameMode.initHumanVsAi();
   human.classList.add('hidden');
   computer.classList.add('hidden');
+  selectMode.classList.toggle('hidden');
+  gameboardGrid.classList.toggle('hidden');
 });

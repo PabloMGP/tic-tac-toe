@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background-color: #1a2b33;
+}
+
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 125px);
+    grid-template-rows: repeat(3, 125px);
+    gap: 4px;
+  }
+
+  .animate {
+    animation: shrinkTile 0.4s ease-in forwards;
+  }
+
+@keyframes shrinkTile {
+    0% {
+        transform: scale(01);
+        background-color: rgb(116, 53, 145);
+    }
+    50% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+        border-radius: 12px;
+    }
+}
